@@ -1,0 +1,1 @@
+main: python balanced_activity_monitor/main.py

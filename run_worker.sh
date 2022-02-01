@@ -1,0 +1,1 @@
+OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES python balanced_activity_monitor/worker.py
