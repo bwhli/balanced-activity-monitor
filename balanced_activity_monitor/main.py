@@ -22,8 +22,9 @@ def main():
     else:
         latest_block = Icx().get_latest_block()
 
+    print(f"Initializing with Block {latest_block}...")
+
     while True:
-        print(f"Initializing with Block {latest_block}...")
         try:
             while True:
                 url = f"https://tracker.icon.community/api/v1/transactions/block-number/{latest_block}?limit=100"
