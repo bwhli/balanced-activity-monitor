@@ -104,7 +104,7 @@ def format_token(token_amount: int, token_contract: str):
     if token_amount.is_integer() is True:
         result = f"{token_amount:,.{0}f} {token_symbol}"
     else:
-        result = f"{token_amount} {token_symbol}"
+        result = f"{token_amount:,.{4}f} {token_symbol}"
     return result
 
 
