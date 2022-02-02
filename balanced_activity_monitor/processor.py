@@ -97,12 +97,14 @@ def process_transaction(tx: Tx):
             vote_index = hex_to_int(tx.data["params"]["vote_index"])
             vote_weight = log.data[1]
             if log.indexed[2] == 1:
-                vote_side = "YES"
+                vote_side = "APPROVED"
+                emoji = "👍"
             else:
-                vote_side = "NO"
+                vote_side = "REJECTED"
+                emoji = "👎"
             message = (
-                "🗳",
-                f"voted {vote_side} for Proposal #{vote_index} with {format_token(vote_weight, 'BALN')}",
+                emoji,
+                f"{vote_side} Proposal #{vote_index} with {format_token(vote_weight, 'BALN')}",
             )
             url = f"https://app.balanced.network/vote/proposal/{vote_index}"
 
