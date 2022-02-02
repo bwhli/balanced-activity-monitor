@@ -22,6 +22,7 @@ def process_transaction(tx: Tx):
         log_methods = []
 
     message = None
+    url = None
 
     if "Swap" in log_methods:  # Balanced Swaps
         swap_logs = [log for log in logs if log.method in ("Swap", "ICXTransfer")]
@@ -93,7 +94,7 @@ def process_transaction(tx: Tx):
     if tx.to_address == "cx44250a12074799e26fdeee75648ae47e2cc84219":  # Balanced Governance
         if tx.method == "castVote":  # 45561816
             log = [log for log in logs if log.method == "VoteCast"][0]
-            vote_name = re.findall(r"BIP\d\d", log.indexed[1])[0]
+            vote_index = hex_to_int(tx.data["params"]["vote_index"])
             vote_weight = log.data[1]
             if log.indexed[2] == 1:
                 vote_side = "YES"
@@ -101,8 +102,9 @@ def process_transaction(tx: Tx):
                 vote_side = "NO"
             message = (
                 "🗳",
-                f"voted {vote_side} for {vote_name} with {format_token(vote_weight, 'BALN')}",
+                f"voted {vote_side} for Proposal #{vote_index} with {format_token(vote_weight, 'BALN')}",
             )
+            url = f"https://app.balanced.network/vote/proposal/{vote_index}"
 
     if tx.to_address == "cx66d4d90f5f113eba575bf793570135f9b10cece1":  # Balanced Loans
         if tx.method == "depositAndBorrow":
@@ -134,4 +136,4 @@ def process_transaction(tx: Tx):
 
     if message is not None:
         print(message)
-        send_discord_notification(message, tx.from_address, tx.hash)
+        send_discord_notification(message, tx.from_address, tx.hash, url)

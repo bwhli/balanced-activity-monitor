@@ -119,21 +119,22 @@ def hex_to_int(input):
 ###################
 
 
-def send_discord_notification(message: tuple, from_address: str, tx_hash: str):
-    if ENV != "DEBUG":
-        emoji, body = message[0], message[1]
-        formatted_message = f"{emoji} `{from_address[:6]}...{from_address[-6:]}` [**{body}**](<https://tracker.icon.community/transaction/{tx_hash}>)."
-        DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
-        payload = {
-            "username": "Balanced Activity Monitor",
-            "avatar_url": "https://brianli.com/balanced/balanced-dao.png",
-            "content": formatted_message,
-        }
-        r = requests.post(DISCORD_WEBHOOK_URL, json=payload)
-        if r.status_code == 204:
-            print("Message Delivered!")
-        else:
-            print("Message Not Delivered!")
+def send_discord_notification(message: tuple, from_address: str, tx_hash: str, url: None):
+    if url is None:
+        url = f"https://tracker.icon.community/transaction/{tx_hash}"
+    emoji, body = message[0], message[1]
+    formatted_message = f"{emoji} `{from_address[:6]}...{from_address[-6:]}` [**{body}**](<{url}>)."
+    DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
+    payload = {
+        "username": "Balanced Activity Monitor",
+        "avatar_url": "https://brianli.com/balanced/balanced-dao.png",
+        "content": formatted_message,
+    }
+    r = requests.post(DISCORD_WEBHOOK_URL, json=payload)
+    if r.status_code == 204:
+        print("Message Delivered!")
+    else:
+        print("Message Not Delivered!")
 
 
 ##################
