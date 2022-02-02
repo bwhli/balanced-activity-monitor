@@ -1,6 +1,5 @@
 import ast
 from models import Tx
-import re
 from icx import Icx
 from rich import print
 from utils import (
@@ -97,10 +96,10 @@ def process_transaction(tx: Tx):
             vote_index = hex_to_int(tx.data["params"]["vote_index"])
             vote_weight = log.data[1]
             if log.indexed[2] == 1:
-                vote_side = "APPROVED"
+                vote_side = "approved"
                 emoji = "👍"
             else:
-                vote_side = "REJECTED"
+                vote_side = "rejected"
                 emoji = "👎"
             message = (
                 emoji,

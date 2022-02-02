@@ -102,10 +102,9 @@ def format_token(token_amount: int, token_contract: str):
     token_precision = get_token_precision(token_contract)
     token_amount = token_amount / 10 ** token_precision
     if token_amount.is_integer() is True:
-        dec = 0
+        result = f"{token_amount:,.{0}f} {token_symbol}"
     else:
-        dec = token_precision - len(str(token_amount)) + 4
-    result = f"{token_amount:,.{dec}f} {token_symbol}"
+        result = f"{token_amount} {token_symbol}"
     return result
 
 
