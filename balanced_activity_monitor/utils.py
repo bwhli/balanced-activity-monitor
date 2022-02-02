@@ -126,7 +126,7 @@ def send_discord_notification(message: tuple, from_address: str, tx_hash: str, u
     if url is None:
         url = f"https://tracker.icon.community/transaction/{tx_hash}"
     emoji, body = message[0], message[1]
-    formatted_message = f"{emoji} `{from_address[:6]}...{from_address[-6:]}` [**{body}**](<{url}>)."
+    formatted_message = f"{emoji} `{from_address[:4]}...{from_address[-4:]}` [**{body}**](<{url}>)."
     DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
     payload = {
         "username": "Balanced Activity Monitor",
