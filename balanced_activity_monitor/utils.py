@@ -42,6 +42,7 @@ IGNORED_CONTRACTS = ["cxaa99a164586883eed0322d62a31946dfa9491fa6"]  # [Optimus]
 #####################
 
 
+@lru_cache(maxsize=1)
 def get_subscribed_contracts():
     contracts = list(CONTRACTS.keys())
     tokens = list(TOKENS.keys())

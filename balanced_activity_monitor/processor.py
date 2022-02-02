@@ -1,12 +1,10 @@
 import ast
-from webbrowser import get
 from models import Tx
 from icx import Icx
 from rich import print
 from utils import (
     comma_separator,
     format_token,
-    get_token_precision,
     hex_to_int,
     send_discord_notification,
 )
