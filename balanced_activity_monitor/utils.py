@@ -17,6 +17,7 @@ CONTRACTS = {
     "cx10d59e8103ab44635190bd4139dbfd682fa2d07e": "Balanced Rewards",
     "cx40d59439571299bca40362db2a7d8cae5b0b30b0": "Balanced Rebalance",
     "cx21e94c08c03daee80c25d8ee3ea22a20786ec231": "Balanced Router",
+    "cxcfe9d1f83fa871e903008471cca786662437e58d": "Balanced Worker Token",
 }
 
 TOKENS = {
@@ -60,6 +61,8 @@ def get_token_ticker(contract: str):
 
 
 def get_token_precision(contract: str):
+    if contract[:2] != "cx":
+        contract = get_token_contract(contract)
     if contract is None or contract == "None":
         return 18
     else:

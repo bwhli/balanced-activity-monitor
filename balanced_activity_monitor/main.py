@@ -18,7 +18,7 @@ ENV = os.getenv("ENV")
 def main():
     # Initialize start block.
     if ENV == "DEBUG":
-        latest_block = 45624893
+        latest_block = 45617893
     else:
         latest_block = Icx().get_latest_block()
 

@@ -1,10 +1,12 @@
 import ast
+from webbrowser import get
 from models import Tx
 from icx import Icx
 from rich import print
 from utils import (
     comma_separator,
     format_token,
+    get_token_precision,
     hex_to_int,
     send_discord_notification,
 )
@@ -125,6 +127,10 @@ def process_transaction(tx: Tx):
             log = [log for log in logs if log.method == "RewardsClaimed"][0]
             claim_amount = log.data[0]
             message = ("🤑", f"claimed {format_token(claim_amount, 'BALN')}")
+
+    if tx.to_address == "cxcfe9d1f83fa871e903008471cca786662437e58d":  # Balanced Worker Token
+        total_distributions = sum([log.indexed[3] for log in logs])
+        message = ("💸", f"Balanced distributed {format_token(total_distributions, 'BALN')} to BALW holders")
 
     ############
     ## TOKENS ##
