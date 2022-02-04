@@ -28,7 +28,7 @@ TOKENS = {
     "cx6139a27c15f1653471ffba0b4b88dc15de7e3267": {"ticker": "GBET", "precision": 18},
     "cxe7c05b43b3832c04735e7f109409ebcb9c19e664": {"ticker": "IAM", "precision": 18},
     "cxae3034235540b924dfcc1b45836c293dcc82bfb7": {"ticker": "IUSDC", "precision": 6},
-    "cx3a36ea1f6b9aa3d2dd9cb68e8987bcc3aabaaa88": {"ticker": "IUSDT", "precision": 18},
+    "cx3a36ea1f6b9aa3d2dd9cb68e8987bcc3aabaaa88": {"ticker": "IUSDT", "precision": 6},
     "cx369a5f4ce4f4648dfc96ba0c8229be0693b4eca2": {"ticker": "METX", "precision": 18},
     "cx1a29259a59f463a67bb2ef84398b30ca56b5830a": {"ticker": "OMM", "precision": 18},
     "cx2609b924e33ef00b648a409245c7ea394c467824": {"ticker": "sICX", "precision": 18},
