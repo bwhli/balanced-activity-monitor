@@ -147,5 +147,5 @@ def send_discord_notification(message: tuple, from_address: str, tx_hash: str, u
 
 def filter_transactions(transactions: list):
     return [
-        Tx(**tx) for tx in transactions if tx["receipt_status"] == 1 and tx["to_address"] in get_subscribed_contracts()
+        Tx(**tx) for tx in transactions if tx["status"] == "0x1" and tx["to_address"] in get_subscribed_contracts()
     ]

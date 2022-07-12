@@ -1,11 +1,13 @@
 import os
-import requests
 from concurrent.futures import ThreadPoolExecutor
+from time import sleep
+
+import requests
 from dotenv import load_dotenv
+from rich import print
+
 from icx import Icx
 from processor import process_transaction
-from rich import print
-from time import sleep
 from utils import filter_transactions
 
 load_dotenv()
@@ -18,9 +20,9 @@ ENV = os.getenv("ENV")
 def main():
     # Initialize start block.
     if ENV == "DEBUG":
-        latest_block = 45617893
+        latest_block = 52554606
     else:
-        latest_block = Icx().get_latest_block()
+        latest_block = Icx.get_latest_block()
 
     print(f"Initializing with Block {latest_block}...")
 
@@ -34,7 +36,9 @@ def main():
                 if len(transactions) > 0:
                     filtered_transactions = filter_transactions(transactions)
                     if len(filtered_transactions) > 0:
-                        with ThreadPoolExecutor(max_workers=len(filtered_transactions)) as executor:
+                        with ThreadPoolExecutor(
+                            max_workers=len(filtered_transactions)
+                        ) as executor:
                             for tx in filtered_transactions:
                                 executor.submit(process_transaction, tx=tx)
                     break
